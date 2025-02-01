@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-hd1yk&$5ay!f@m%-i6$74)!*7w#9*8^$chtrqj0*^n@_bk2unn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'ecommerce-i9z3.onrender.com',  # Add this domain
+    '127.0.0.1',  # Keep localhost for testing
+    'localhost',  # Keep for local testing
+]
 
 
 # Application definition
@@ -48,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'BlogApp.urls'
