@@ -1,0 +1,33 @@
+{% extends 'base/index.html' %}
+{% block content %}
+
+<div class="row justify-content-center">
+    <h2 class="text-center">My blogs</h2>
+    <br><br><br>
+    <div class="col-lg-6">
+        {% for post in posts %}
+        <form method="post">
+            {% csrf_token %}
+        <div class="card mb-5 shadow-sm">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="text-primary mb-0">{{ post.author }}</h4>
+                <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">{{ post.Title }}</h3>
+                <p class="card-text">{{ post.description }}</p>
+                <div class="d-flex justify-content-between mt-3">
+                    <a href="{% url 'update_post' post.id %} " class="btn btn-sm btn-outline-primary">Update</a>
+                    <a href="{% url 'delete_post' post.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="alert alert-info text-center"><a href="{%url 'create_post' %}" class="btn btn-sm btn-outline-primary">No posts available. Create your first post!</a>
+            
+        </div>
+        {% endfor %}
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,45 @@
+{%extends 'base/index.html'%}
+{% block content %}
+{%load static%}
+<style>
+    body{
+        background-color: rgb(36, 33, 33);
+    }
+    .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+</style>
+
+<div class="login-container">
+    <h3 class="text-center">Login</h3>
+    <form method="post"> 
+        {% csrf_token %}      
+        <div class="mb-3">
+            <label for="name" class="form-label">Username</label>
+            <input type="text" class="form-control" id="text" name="uname" placeholder="Enter your Username" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="upassword" placeholder="Enter your password" required>
+        </div>
+
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="rememberMe">
+            <label class="form-check-label" for="rememberMe">Remember Me</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100"><a href="{% url 'home' %}">Login</a>
+        </button>
+
+        <p class="mt-3 text-center">
+            Don't have an account? <a href= "{% url 'signup'%}">Sign up</a>
+        </p>
+    </form>
+</div>
+{%endblock%}

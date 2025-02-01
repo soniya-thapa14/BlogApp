@@ -1,0 +1,73 @@
+
+{% extends 'base/index.html' %}  
+{% block content %}
+{% load static%}
+<div class="container mt-5">
+    <div class="row">
+        <!-- Profile Card -->
+        <div class="col-md-4">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <div class="mb-1">
+                        {% if profile.image %}
+                            <img src="{{ profile.image.url }}" class="rounded-circle" alt="Profile Picture" style="width: 150px; height: 150px; object-fit: cover;">
+                        {% else %}
+                            <img src="{% static 'images/default.jpg' %}" class="rounded-circle" alt="Default Profile Picture" style="width: 150px; height: 150px; object-fit: cover;">
+                        {% endif %}
+                    </div>
+                    <h3 class="card-title">{{ user.username }}</h3>
+                    <p class="text-muted">Joined {{ user.date_joined|date:"F d, Y" }}</p>
+                    <a href="{% url 'update_profile' %}" class="btn btn-primary">Edit Profile</a>
+                    <button class="btn btn-outline-info" type="submit"><a href="{% url 'home' %}">Go Back</a></button>  
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Details -->
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Profile Details</h4>
+                </div>
+                <div class="card-body">
+                    <h5>First Name: {{ user.first_name }}</h5>
+                    <h5>Last Name: {{ user.last_name }}</h5>
+                    <h5>Email: {{ user.email }}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- User Posts Section -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-secondary text-white">
+                    <h4 class="mb-0">My Posts</h4>
+                </div>
+                <div class="card-body">
+                    {% for post in posts %}
+                    <form method="post">
+                        {% csrf_token %}
+                    <div class="card mb-5 shadow-sm">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h4 class="text-primary mb-0">{{ post.author }}</h4>
+                            <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">{{ post.Title }}</h3>
+                            <p class="card-text">{{ post.description }}</p>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <div class="alert alert-info text-center">
+                        No posts available. Create your first post!
+                    </div>
+                    {% endfor %}
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
