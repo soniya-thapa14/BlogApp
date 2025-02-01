@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-hd1yk&$5ay!f@m%-i6$74)!*7w#9*8^$chtrqj0*^n@_bk2unn
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'ecommerce-i9z3.onrender.com',  # Add this domain
+    'blogapp-0iaz.onrender.com',  # Add this domain
     '127.0.0.1',  # Keep localhost for testing
     'localhost',  # Keep for local testing
 ]
